@@ -1,0 +1,836 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The_Blind_Eye_Observatory</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+/* For default-background callouts, render the border outline. */
+.callout.block-color-default_background {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+/*
+ * Toggles and callouts hold arbitrary content, so they can easily be taller
+ * than a page. They must stay breakable: avoiding breaks inside them makes
+ * Chromium push the whole block onto the next page, which leaves the previous
+ * page mostly empty before every long toggle.
+ */
+details,
+aside {
+	margin: 1.25em 0;
+}
+
+/* Keep a toggle's title on the same page as the start of its content. */
+summary {
+	page-break-after: avoid;
+	break-after: avoid;
+}
+
+/*
+ * Toggle headings render as <h1/h2/h3 style="display:inline-block"> inside
+ * <summary>. Without this reset, the heading's margin-top pushes it below the
+ * ::marker (▼), so the triangle and the title appear on separate lines.
+ */
+summary h1,
+summary h2,
+summary h3,
+summary h4 {
+	margin-top: 0;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding-inline: 0.125rem;
+	padding-block: 0.375rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+/*
+ * Render emoji icons using a ::before pseudo-element to keep the glyph
+ * out of the DOM textContent traversal. This avoids double-rendering icons
+ * in callouts and page titles.
+ * NOTE(slim/html-export-pseudo-icons): I can't tagref this because it will
+ * flag as a duplicate tag after codegen.
+ */
+.icon[data-emoji]::before {
+	content: attr(data-emoji);
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.tab {
+	margin: 1.25em 0;
+	padding-inline: 1rem;
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style></head><body><article id="3c611121-6a91-807d-aa55-e032c6e047db" class="page sans"><header><h1 class="page-title" dir="auto">The_Blind_Eye_Observatory</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><h1 id="3c611121-6a91-81dd-b742-fc4b5afa1f42" class="" dir="auto">The Blind Eye</h1><h3 id="3c611121-6a91-814d-b20c-c6f0ab2ea100" class="" dir="auto">An Ancient Elven Observatory — Basement, Ground Floor, Upper Floor</h3><p id="3c611121-6a91-8160-aeef-f5b74c4a1899" class="" dir="auto"><strong>Local name:</strong> the Blind Eye <strong>Tuned for:</strong> four characters at level 4, D&amp;D 2024 (scaling notes at the end) <strong>Placement:</strong> Any jungle or highland hex <strong>four or more hexes from the City of Light</strong>. No undead here — that’s deliberate.</p><hr id="3c611121-6a91-8123-927a-ec92f4052bf9" dir="auto"/><h2 id="3c611121-6a91-8168-97a2-f15d5c6be126" class="" dir="auto">The Shape of It</h2><p id="3c611121-6a91-8142-9518-c7d7f10d320e" class="" dir="auto">A white stone tower the elves left behind, still doing its job with nobody home.</p><ul id="3c611121-6a91-8107-8a5b-e9352fc147af" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Ground floor</strong> — six rooms and a hall. The golems, and the reywish.</li></ul><ul id="3c611121-6a91-810d-bdd3-cc5da7c5603e" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Upper floor</strong> — one round room. The Choirmaster, and <strong>the Sphere</strong>.</li></ul><ul id="3c611121-6a91-814f-a29e-cb2781f302d3" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Basement</strong> — a stair, a hall, and one big room with a <strong>portal</strong> in the middle of it.</li></ul><p id="3c611121-6a91-81ac-9efd-df75282d5c98" class="" dir="auto"><strong>Two things matter here, and nothing else does.</strong></p><p id="3c611121-6a91-81c7-8324-dfa0e84b3583" class="" dir="auto"><strong>1. The Sphere.</strong> It is a map of Chult with lights on it, and the lights are people the death curse has taken hold of. One of those lights is sitting on the party’s camp. This is the thing they walk out remembering.</p><p id="3c611121-6a91-8150-a66e-c36307851404" class="" dir="auto"><strong>2. The portal.</strong> Three chimes light it and it stays lit forever. It opens onto darkness, because the far end hasn’t been switched on yet. When the party finds and lights the other one, they have fast travel across the island for the rest of the campaign.</p><p id="3c611121-6a91-81f1-aec2-eb657e78db09" class="" dir="auto">Everything else in this tower is fights and loot. Don’t over-explain the elves. The party will work out what they need to.</p><hr id="3c611121-6a91-81d3-bcef-c82661a7a380" dir="auto"/><h2 id="3c611121-6a91-8145-bba9-cabae1dfd8ae" class="" dir="auto">Approach</h2><blockquote id="3c611121-6a91-81d3-b104-c002a7d469e8" class="block-color-blue" data-notion-highlight="blue" dir="auto">A ridge of white stone rises out of the canopy in broad, lipped terraces, like a stack of pale shelf fungus grown to the size of houses. Water seeps from the terrace edges and steams in the heat. At the top sits a drum of white stone, four storeys high, windowless — with a jungle fig grown clean through its western wall.</blockquote><p id="3c611121-6a91-8146-ad4b-c0826f9bd8f5" class="" dir="auto">The terraces are travertine, built up over centuries by a hot spring beneath the tower. Easy route up: <strong>DC 10 Athletics</strong>, or no check at a Slow pace.</p><p id="3c611121-6a91-817f-a709-ef3539252b5f" class="" dir="auto"><strong>Landmark.</strong> Visible from three hexes out in clear weather. Once seen, it grants advantage on Survival checks to navigate in any adjacent hex.</p><hr id="3c611121-6a91-81a6-b3a3-d2c75c1512c6" dir="auto"/><h1 id="3c611121-6a91-81a3-9233-f28955e780f2" class="" dir="auto">Ground Floor — Six Rooms and a Hall</h1><p id="3c611121-6a91-81a5-80df-d588c0d11c3a" class="" dir="auto"><em>Everything here is geometric. Interlocking hexagons, nested squares, star-rays measured to the degree. Nothing curves.</em></p><p id="3c611121-6a91-8119-98c0-c07c7b24248a" class="" dir="auto"><strong>Layout.</strong> Entrance on the west into room 1. Room 5 is the central hall — the artery, and every route back to the entrance runs through it. Stairs up in room 7 (northeast). Stairs down beside room 4 (southeast).</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="3c611121-6a91-819e-a008-e278414ef014" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">                              N
+        +----------------+------------------------+---------+
+        |                |                        |   7.    |
+        |       1.       |   6. HALL OF PRICES    |  STAIR  |
+   ==&gt;  |     ENTRY      |    (ledger mosaic)     |  DRUM   |
+  doors |      HALL      |                        |  (up)   |
+        |                +------------------------+---------+
+        |                |                                  |
+        |                |     5. HALL OF CUSTODIANS        |
+        |                |    six niches - the artery       |
+        +----------------+----------------------------------+
+        |                 |                |                |
+        |  2. REFECTORY   |  3. SAMPLING    |   4. ROOST     |
+        |  (witchweave)   |     COURT      |  (spinners)    |
+        |                 |    (sipopa)    | stairs down v  |
+        +-----------------+----------------+----------------+</code></pre><p id="3c611121-6a91-81db-ad8f-f5028c82ae48" class="" dir="auto">Room 1 opens only into room 5. So does everything else. The golems sit in the middle of the only route out.</p><p id="3c611121-6a91-8177-86d8-dca2d2607280" class="" dir="auto"><strong>The blue crystal.</strong> Chips and nodules of pale blue mineral are scattered across every floor in this building, thickest near walls and doorways. It’s spring deposit, pushed up through the flagstones by the hot water below — pretty, and worth about 2 gp a handful to the right buyer. It’s also a <strong>map</strong>: the heaviest concentrations mark where water runs beneath the floor, and following the densest trail leads to the stairs down.</p><h3 id="3c611121-6a91-81ca-ab8d-f02cbd4d1bb6" class="" dir="auto">Entrance — The Terrace Doors</h3><blockquote id="3c611121-6a91-8182-866d-f26066d5295e" class="block-color-blue" data-notion-highlight="blue" dir="auto">Two doors of white stone stand open a hand’s width, jammed by a root. Above the arch hangs a beard of orange moss, fine as velvet, two feet long, stirring though there is no wind.</blockquote><p id="3c611121-6a91-81df-b603-c09ba20f4ed1" class="" dir="auto"><strong>Ambermoss.</strong> Anyone forcing the doors passes beneath it — <strong>DC 13 Dexterity save</strong> or brush it bare-skinned.</p><p id="3c611121-6a91-8106-beca-f7fadc000505" class="" dir="auto">Poisoned 15 minutes later. Roll or pick, lasting 1d4 hours: blindness; a low repetitive <em>wub, wub, wub</em> in the ears; amnesia covering the last hour; agoraphobia; hypersensitivity to touch (disadvantage on attacks); or reverse kleptomania — the victim compulsively leaves their possessions behind in rooms they pass through. They’ll find them on the way out.</p><p id="3c611121-6a91-81d6-8986-ce35400b982b" class="" dir="auto"><strong>The same character always suffers the same effect, every time, forever.</strong> Write it down.</p><p id="3c611121-6a91-8100-be36-f95b8874c21d" class="" dir="auto">Harvested carefully (<strong>DC 15 Nature</strong>, plus an oiled cloth or thieves’ tools): worth 25 gp to the right buyer.</p><h3 id="3c611121-6a91-8125-ad37-d739aa1efbb1" class="" dir="auto">1. The Entry Hall</h3><blockquote id="3c611121-6a91-8183-8a09-d2a68b33e5e9" class="block-color-blue" data-notion-highlight="blue" dir="auto">A tall room, and the first thing you notice is that it was beautiful. The floor is inlaid in interlocking hexagons of three shades of white, and half of it is buried under a fall of roof stone that came down long ago. A jungle fig has grown through the western wall and stands in the room like a pillar.</blockquote><p id="3c611121-6a91-8169-920d-ce7c3a522e63" class="" dir="auto">Nothing has passed through here in a very long time. The dust of blue crystal on the flagstones is unbroken.</p><p id="3c611121-6a91-81bc-8aab-f0f8777f2612" class="" dir="auto"><strong>DC 12 Investigation</strong> under the rubble: a low stone sledge on hardwood rollers, the kind used to move loads across a flat floor, and a rack of stone tallies still in their slots. Whatever the elves carried in and out of this building, they carried a lot of it.</p><p id="3c611121-6a91-817d-ba55-c3d989d1c593" class="" dir="auto"><strong>Treasure.</strong> Prised tiles from the inlay, about 30 gp worth of blue and white stone, and a silver stylus in a case.</p><p id="3c611121-6a91-8127-aad3-e3d7d40232bd" class="" dir="auto">Under the roof fall, a crushed weapon rack — a door guard’s, by its position. Everything in it is ruined but one: a <strong>+1 light crossbow</strong> of white stone and mithral, string long rotted, the weapon itself untouched. String it and it works. <em>Put something good in the first room.</em></p><h3 id="3c611121-6a91-81d9-808f-d44d63b84618" class="" dir="auto">2. The Refectory — <em>encounter</em></h3><blockquote id="3c611121-6a91-8141-b320-c95d69b75474" class="block-color-blue" data-notion-highlight="blue" dir="auto">The jungle has taken this room. Roots have split the flagstones and a thick mat of pale yellow-green growth covers most of the floor and climbs the walls. Long stone benches are still bolted along two sides, and a serving trough runs the length of the third.</blockquote><p id="3c611121-6a91-8150-9096-e2b4807854fe" class="" dir="auto">Where the staff ate. Nothing precious here, which is exactly why it’s worth searching — this is the room that establishes these were <strong>people with jobs</strong>.</p><p id="3c611121-6a91-813c-8212-c86979fd1664" class="" dir="auto"><strong>DC 12 Investigation</strong> turns up: stone bowls stacked in the trough, forty of them; a child’s carved wooden animal, cracked; and scratched tally-marks on the underside of one bench, hundreds of them, counting something down rather than up.</p><p id="3c611121-6a91-8104-bb25-c0c7446f5422" class="" dir="auto"><strong>Herbalist’s note.</strong> The pale growth is <strong>witchweave</strong>, seeded in from outside and thriving in the damp. A character who recognises it (<strong>DC 15 Nature</strong>, advantage if Chultan) can harvest <strong>3 doses of witchweave salve</strong> here (each heals 2d4+2 hp, one use) with an hour’s work.</p><p id="3c611121-6a91-81d6-9a1e-f019255e0055" class="" dir="auto"><strong>Encounter: 1 shambling mound</strong> (CR 5, 1,800 XP), <strong>90 hit points</strong> rather than 136 — at AC 15 with lightning immunity and cold/fire resistance, the full statblock is a ten-round slog at this tier.</p><p id="3c611121-6a91-81a4-804d-ca18971e39e2" class="" dir="auto">Part of the mat is not mat. It has been lying in the damp of this room long enough to be indistinguishable from it (<strong>passive Perception 16</strong>, or it gets a surprise round). It rises when someone walks over its middle — which is most of the floor — or when someone starts cutting witchweave.</p><p id="3c611121-6a91-818d-8d15-d7ce4f386134" class="" dir="auto"><strong>Engulf is the whole fight.</strong> One character gets grappled, restrained, blinded, and takes 2d8 a turn until the party pulls them out. Against four level-4 PCs that is a real emergency and a solvable one. The mound does not pursue anyone out of this room; it has no interest in anything beyond its own floor.</p><p id="3c611121-6a91-81a8-ade4-f2178628aa62" class="" dir="auto"><strong>The benches matter.</strong> The stone benches are bolted down and stand two feet high. A character who fights from on top of one is out of the mound’s reach on its turn unless it steps closer, and the mound moves 20 feet. Reward whoever thinks of it.</p><p id="3c611121-6a91-814c-85ee-d5736ffcc286" class="" dir="auto"><strong>Treasure.</strong> Undigested in the mound’s mass: a silver serving set, tarnished black but intact (<strong>25 gp</strong>), and a stone flask that turns out to be a <em>potion of greater healing</em>.</p><p id="3c611121-6a91-81e0-ba48-d76591c05938" class="" dir="auto"><strong>Under the mound.</strong> Set into the flagstones beneath where it was lying is a fitted stone disc — the elves’ <strong>freight hatch</strong> down into the portal room (<strong>DC 13 Perception</strong> once the growth is cleared). It opens only from below. See the basement notes.</p><h3 id="3c611121-6a91-8143-b7c0-ecf83be6f0bf" class="" dir="auto">3. The Dye Works — <em>encounter</em></h3><blockquote id="3c611121-6a91-81ef-8cb3-ea8b542ec292" class="block-color-blue" data-notion-highlight="blue" dir="auto">Three shallow basins are sunk into this floor, tiled in blue and white, all of them dry and cracked. The furthest is crusted with a hard blue-green residue and still leaks steam through the cracks. Stone paddles and straining frames are stacked against the wall, stained the same colour. The far corner is a thicket of dark, thorny bush with red-orange flowers.</blockquote><p id="3c611121-6a91-8102-9e60-c1f52b7bd5cc" class="" dir="auto">This is where they made the <em>reywish</em> — the blue dye. Hot spring water, the right plant matter, and a lot of patient boiling. The stained paddles and frames make it obvious at a glance what happened in this room, and the jars in room 6 are the finished product. Nothing deeper than that.</p><p id="3c611121-6a91-8152-b420-f8ba32d02457" class="" dir="auto"><strong>Encounter: 1 giant centipede, red</strong> (CR 2, 450 XP). It dens in the warm crack at the bottom of the third basin — the one that still steams — and it comes out fast, forty feet, climbing the walls if it has to. Blindsight 30 ft. means darkness and invisibility do nothing to it.</p><p id="3c611121-6a91-8178-9410-e6d2088a53a3" class="" dir="auto">Its bite is 2d4+2 piercing plus a <strong>DC 11 Constitution save</strong> or 3d6 fire damage and poisoned for 1 minute, skin burning. One good hit will frighten a level-4 party more than the numbers deserve, which is the point of putting it first.</p><p id="3c611121-6a91-8116-8582-e46d0ca1ba24" class="" dir="auto"><em>Swap freely: the yellow variant confuses instead of burns, the black paralyzes. Black is the nastiest — paralysis means automatic critical hits from anything in melee.</em></p><p id="3c611121-6a91-8161-8ed5-cd7f9c1867ae" class="" dir="auto"><strong>Hazard.</strong> The thorn thicket is <strong>sipopa</strong>, and growing at its base is a clump of <strong>snapping grass</strong> — fuchsia hinged leaves on swaying stalks. It lunges at anything shiny. A character who reaches into the thicket without checking takes <strong>1d6 piercing</strong> and must make a <strong>DC 12 Dexterity save</strong> or lose one small carried item (ring, gem, coin pouch) to the grass, which drags it down among the roots.</p><p id="3c611121-6a91-81b2-91d5-d9f47b78a597" class="" dir="auto"><strong>Treasure.</strong> In the third basin, under a lid of dried crust (<strong>DC 12 Perception</strong> to notice the lid isn’t part of the basin): a fitted case of elven tools, packed and never unpacked — silver measures, a graduated rod, and two ground glass lenses in felt, all unscratched. <strong>120 gp</strong> the set, and genuinely useful to anyone who wants to work the recipe from room 6.</p><h3 id="3c611121-6a91-8188-b4d8-ced42874feb7" class="" dir="auto">4. The Roost — <em>encounter</em></h3><blockquote id="3c611121-6a91-81f4-8a0f-e9aab6bbd4ca" class="block-color-blue" data-notion-highlight="blue" dir="auto">The ceiling of this room is strung with webs — not grey, not sticky-looking, but drawn silver wire, arranged in geometries that are unpleasant to follow with the eye. Shapes hang in them. The stairs down open off the far corner, and the webbing runs down into the stairwell.</blockquote><p id="3c611121-6a91-8140-ae7f-fbf16fb2257e" class="" dir="auto"><strong>Encounter: 3 astral spinners</strong> (CR 1 each, 600 XP — an easy warm-up, and the right first fight in the building).</p><p id="3c611121-6a91-814c-823c-ec0ca40e5a9c" class="" dir="auto">Polished silver, spider-like, glowing liquid spheres for bodies. They drop from the ceiling when the party is halfway in, focus one target, and try to wrap and withdraw upward rather than fight to the death. They are <strong>collecting</strong>, not defending.</p><p id="3c611121-6a91-8138-a569-dba1690b96e2" class="" dir="auto"><strong>Their bite</strong> forces a <strong>DC 12 Wisdom save</strong> or the target is stunned until the end of its next turn as it experiences a brief, disorienting astral projection. Describe what the character sees during that half-second: white light, a stone ring, and a great many people standing very still.</p><p id="3c611121-6a91-8104-93a6-fc827965f0a6" class="" dir="auto"><strong>Treasure.</strong> Cocooned overhead, 15 ft up: 60 gp in mixed coin, a <em>potion of healing</em>, a broken spyglass (repairable with tools and an hour), and a <strong>+1 dagger</strong> with a hilt of pale wood. The spinners were collecting; a good blade is exactly what they would take.</p><p id="3c611121-6a91-8144-92c8-f62bcda3751c" class="" dir="auto"><strong>Stairs down</strong> are through this room. The webbing continues down the stairwell for about twenty feet and then stops abruptly, as though the spinners will not go further.</p><h3 id="3c611121-6a91-814a-a578-e9347def76b9" class="" dir="auto">5. The Hall of Custodians — <em>encounter</em></h3><blockquote id="3c611121-6a91-8101-ae0c-e684f166690a" class="block-color-blue" data-notion-highlight="blue" dir="auto">The central hall runs the width of the building, and every room you have seen connects to it. Shallow niches line both walls — six of them. Two hold stone figures: idealized elves, beautifully carved, lower jaws hinged open into throats of copper tubing. The other four hold rubble — figures that fell and shattered where they stood, copper tubing spilling out of the pieces. The air hums.</blockquote><p id="3c611121-6a91-810b-b34c-f763bf4df18d" class="" dir="auto"><strong>Encounter: 2 singing golems</strong> (CR 5 each, 3,600 XP — a <em>high</em>-difficulty fight for four level-4 characters, and the tower’s hardest by design; see the mercy below).</p><p id="3c611121-6a91-8176-9a65-ebdc04a58a16" class="" dir="auto"><strong>Two changes to the statblock, both mandatory at this level:</strong></p><ul id="3c611121-6a91-819b-91c5-d405368a2676" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Resistance, not immunity,</strong> to bludgeoning, piercing, and slashing from nonmagical weapons. As written they’re immune, and a level-4 party won’t have four magic weapons — half the group would be unable to damage them at all.</li></ul><ul id="3c611121-6a91-8148-94be-c0b4342578e8" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>60 hit points each,</strong> down from 75.</li></ul><p id="3c611121-6a91-81d5-aa03-ea04e6bff7dc" class="" dir="auto"><strong>Their order: nothing leaves the tower.</strong> They activate when anyone crosses the hall, and they attack only creatures moving <em>toward the entrance</em>. Parties heading deeper, upstairs, or downstairs are ignored entirely — the golems track them with their heads and do nothing.</p><p id="3c611121-6a91-812c-bfe9-f4141c169200" class="" dir="auto">Because the hall connects everything, the party will cross it repeatedly. The golems will let them, every time, until the moment someone turns for the door. That’s the puzzle, and it should dawn on them slowly.</p><p id="3c611121-6a91-8178-b2f3-f471536896de" class="" dir="auto"><strong>Their song stacks.</strong> Each golem within 30 feet forces a <strong>DC 12 Wisdom save</strong> at the start of a creature’s turn or charmed until the start of its next turn (no reactions, speed halved). Standing between both means two saves a round. Fighting them in the open hall is a mistake; fighting them from a doorway, where only one has line on you, is not.</p><p id="3c611121-6a91-8174-a38a-ff18f11ec102" class="" dir="auto"><strong>Mercy.</strong> A character who sounds a chime, plays an instrument, or succeeds on <strong>DC 15 Performance</strong> causes both golems to pause for one round and <em>harmonise</em> — they will not attack that round. Repeated three times, they return to their niches and stand down permanently. This is the intended solution and anyone who tries the obvious thing will find it.</p><p id="3c611121-6a91-810f-ac02-f0ef5421a3bb" class="" dir="auto"><strong>Treasure.</strong> Behind the ears of each golem are carved symbols — a number and a tone-notation. Only one, the nearer, still carries its <strong>copper chime</strong>, seated in its throat. Four inches, cool, etched <em>IX</em>. Struck, the tone hangs far longer than it should.</p><p id="3c611121-6a91-817e-9ad6-c7f6705e5207" class="" dir="auto"><strong>The broken niches.</strong> Four custodians came apart with age. Sorting the rubble (ten minutes) turns up <strong>40 gp</strong> of copper piping and a handful of tone-plates, worthless but pretty.</p><h3 id="3c611121-6a91-8187-93d5-d0420f7f8072" class="" dir="auto">6. The Stores</h3><blockquote id="3c611121-6a91-81a0-a950-c4c8c9462cb5" class="block-color-blue" data-notion-highlight="blue" dir="auto">The largest room on this floor. Stone shelving lines three walls, holding hundreds of thin ceramic tablets, most still in their racks. The fourth wall is a mosaic of a night sky, the stars laid out in ruler-straight lines and perfect arcs.</blockquote><p id="3c611121-6a91-81a6-bee2-c799b49bc164" class="" dir="auto">Storage and paperwork. An hour and <strong>DC 12 Investigation</strong> (or reading Elvish) sorts the tablets: shipping tallies, batch counts, and a great deal of accounting about a blue dye called <em>reywish</em>.</p><p id="3c611121-6a91-8181-a852-fd8ca9a4524d" class="" dir="auto"><strong>Don’t dig for meaning here.</strong> These people ran a tower and sold dye. That’s all this room needs to say.</p><p id="3c611121-6a91-8118-98ff-cb103ae5583d" class="" dir="auto"><strong>Treasure.</strong> A sample cabinet stands at the end of the shelving, its stone door still sealed:</p><ul id="3c611121-6a91-81c3-b851-fd52cd1df7b5" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Twelve sealed jars of </strong><em><strong>reywish</strong></em> — finished dye, prepared and never shipped. Still vivid. A genuine trade good: the Night Axe, the lizardfolk, and anyone else on the island who wants colour will pay for it.</li></ul><ul id="3c611121-6a91-811f-9a7f-cbf1d3a0144a" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>The recipe</strong>, on a stone tablet propped against the jars. Plain instructions, no cipher, no roll to read beyond knowing Elvish. <strong>The party can make reywish from now on</strong> — hot spring water, the right plant matter, the basins in room 3 or any equivalent setup, and a few days. Sell it, trade it, dye things blue. That is the whole of what reywish is and it never needs to be more.</li></ul><ul id="3c611121-6a91-81c9-92d6-ddc3c1ad0718" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Three ground glass lenses in stone cases, <strong>25 gp</strong> each.</li></ul><ul id="3c611121-6a91-81a1-befd-cbf9a6d4d70f" class="bulleted-list" dir="auto"><li style="list-style-type:disc">A <strong>spell scroll of </strong><em><strong>comprehend languages</strong></em>, filed flat among the tablets like any other document.</li></ul><h3 id="3c611121-6a91-81f8-98a8-f12708de9019" class="" dir="auto">7. The Stair Drum</h3><p id="3c611121-6a91-81c5-b47e-ff0772d92942" class="" dir="auto">A bare vestibule at the northeast corner. A spiral stair of white stone climbs to the upper floor. There is nothing else in this room, and there is no dust on the steps.</p><h1 id="3c611121-6a91-8162-998f-dcad4fdb552e" class="" dir="auto">Upper Floor — The Instrument Hall</h1><p id="3c611121-6a91-8195-8e65-e4d209da1c3f" class="" dir="auto"><strong>One room.</strong> A circle 80 feet across, filling the whole top of the tower. No dividing walls, no side chambers, no cover except what stands on the floor. The stair from room 7 comes up at the northeast edge.</p><pre id="3c611121-6a91-8180-8f9a-d5867a84b8ba" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">                             N
+                                        stair up from room 7
+                 .-----------------------.   /
+               /        [C] charts        \ v
+             /                              \
+            |  [C]       .-----------.  [C]  |
+            |           /             \      |
+            |          |   APERTURE    |     |
+            |          |  30 ft open   |     |
+            |          |  [A]  SPHERE   |     |
+            |           \             /      |
+            |  [C]       &#x27;-----------&#x27;  [C]  |---- [E] BALCONY
+             \                             /        (southeast)
+               \      [B] CHOIRMASTER    /
+                 &#x27;-----------------------&#x27;</code></pre><blockquote id="3c611121-6a91-81b7-ad2c-c0902d313cbd" class="block-color-blue" data-notion-highlight="blue" dir="auto">The stair opens onto a single vast circular room, and it takes a moment to understand what you are looking at, because there is no ceiling. A perfect circle thirty feet across is cut clean out of the roof above the centre of the chamber, open to the sky.<br/>The floor is bare and clean. Not swept-clean — <em>clean</em>, the way a thing is clean when nothing has ever been allowed to settle on it. There is no dust anywhere in this room, and no leaf litter, and no bird mess, in a building with a hole in the roof in the middle of a jungle.<br/>Racks of charts stand around the curved wall like the spokes of a wheel. And at the far side, something tall is moving.</blockquote><h3 id="3c611121-6a91-81f9-a311-c4d3dce313a1" class="" dir="auto">A. The Sphere — <em>the whole point of this dungeon</em></h3><p id="3c611121-6a91-8199-ac7a-ff61574d53ee" class="" dir="auto"><strong>The room is kept.</strong> Nothing accumulates in here. Dust, leaves, rain, insects, the droppings of whatever nests on the roof — none of it settles, and none of it ever has. Handfuls of dirt thrown on the floor are simply gone the next time anyone looks. It isn’t cleaned. It doesn’t <em>collect</em>.</p><p id="3c611121-6a91-8108-a464-d285da53a0b0" class="" dir="auto"><strong>DC 13 Arcana or Investigation:</strong> whatever does this is part of the instrument, not a separate enchantment. The Sphere is a measuring device, and a measuring device does not tolerate anything getting between it and what it measures. The room is clean for the same reason a lens is clean.</p><p id="3c611121-6a91-81f5-bbd2-cc9d17f6d0da" class="" dir="auto"><em>Practical effects:</em> none worth tracking in a fight. It’s here to be <strong>odd</strong>, and to tell the party that this floor is still running when the rest of the tower plainly is not.</p><hr id="3c611121-6a91-8189-ab37-d461150bd1e1" dir="auto"/><p id="3c611121-6a91-8139-a9f0-f43764c5c2a0" class="" dir="auto">Directly beneath the aperture, in the centre of the room.</p><blockquote id="3c611121-6a91-811b-82f8-f3b7d6765ab3" class="block-color-blue" data-notion-highlight="blue" dir="auto">A globe of clear crystal eight feet across is held in a ring of corroded brass. The ring is seized solid with age; the sphere is turning inside it anyway, slowly, grinding as it goes.<br/>There is a shape inside the glass, and after a moment you recognise it. It is Chult. The whole island, hanging in the middle of the sphere — the coastline, the mountains, the river valleys, rendered in something like smoke.<br/>There are lights on it. Perhaps three dozen, scattered thin across the island, each one sitting on a place. Most are small and steady. A few are guttering, grey, nearly out. And inland, far to the interior, a knot of them burns together in one spot, too many to count.</blockquote><p id="3c611121-6a91-8156-958b-e3d7f39051d6" class="" dir="auto"><strong>Give them time. Say nothing.</strong> This is the single thing you want them to leave with, and it works because nobody explains it.</p><p id="3c611121-6a91-811f-96cf-fd84b8147eea" class="" dir="auto"><strong>What the lights are.</strong> Every light is a living person the death curse has taken hold of. <strong>Bright</strong> means it has just begun. As the curse works on someone, their light dims. When the person dies, the light comes loose from the map and <strong>travels</strong> — sliding across the inside of the glass, to the knot inland.</p><p id="3c611121-6a91-81fe-b6c0-fc83a4510ce8" class="" dir="auto"><strong>What the party sees, in order, with no rolls:</strong></p><ol type="1" id="3c611121-6a91-8153-beb9-c9ed71b347f4" class="numbered-list" start="1" dir="auto"><li><strong>It’s a map.</strong> Any character who has walked any part of Chult recognises the coastline.</li></ol><ol type="1" id="3c611121-6a91-81d7-a733-ee8398104bf6" class="numbered-list" start="2" dir="auto"><li><strong>Their camp has a light on it.</strong> Bright and steady. If they’ve left an NPC there, this is that NPC — the same one whose healing stopped working properly.</li></ol><ol type="1" id="3c611121-6a91-818c-8e54-fd2cb7e9b01a" class="numbered-list" start="3" dir="auto"><li><strong>They are on it.</strong> Any character in the room who has been raised from the dead, or healed by magic that didn’t work the way it should have, has their own bright light sitting exactly where this tower is. It moves when they move. Someone will test this. Let them.</li></ol><ol type="1" id="3c611121-6a91-81bd-8804-ff6bae524d35" class="numbered-list" start="4" dir="auto"><li><strong>Everyone else on the island is dark.</strong> Roughly three dozen lights on a whole island. It isn’t everywhere. It’s <em>specific people</em>, and it includes them.</li></ol><ol type="1" id="3c611121-6a91-8144-8d38-e55740fa3a3e" class="numbered-list" start="5" dir="auto"><li><strong>The knot inland.</strong> Nobody in this tower will ever tell them what that is or how to get there. It is simply where the lights go.</li></ol><p id="3c611121-6a91-8121-9b65-e2c8a152778c" class="" dir="auto"><strong>Working it out — the checks.</strong> The reads above are free and no roll can take them away. Checks buy <em>meaning</em>, and any one of them is enough to land the dungeon. Let characters retry with a different skill rather than gating this behind one bad roll.</p><table id="3c611121-6a91-8185-8364-dcd4379315fb" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-81ce-9424-d7c1e8945291" dir="ltr"><th id="SNF;" class="simple-table-header-color simple-table-header">Check</th><th id="g@Tl" class="simple-table-header-color simple-table-header">DC</th><th id=";BEA" class="simple-table-header-color simple-table-header">What it buys</th></tr></thead><tbody><tr id="3c611121-6a91-8148-b0d9-f09360330dbd" dir="ltr"><td id="SNF;" class=""><strong>Arcana</strong></td><td id="g@Tl" class="">12</td><td id=";BEA" class="">The magic isn’t divination. It isn’t looking for anything. It is <em>receiving</em> — something is being sent here.</td></tr><tr id="3c611121-6a91-8174-baf4-fe102796bf7b" dir="ltr"><td id="SNF;" class=""><strong>Arcana</strong></td><td id="g@Tl" class="">16</td><td id=";BEA" class="">Each light is a soul with something holding onto it. Not dead. <strong>Caught.</strong></td></tr><tr id="3c611121-6a91-811e-991e-fbb0a3f8d6ac" dir="ltr"><td id="SNF;" class=""><strong>Religion</strong></td><td id="g@Tl" class="">13</td><td id=";BEA" class="">Whatever this shows, those people will not pass on when they die. Something is in the way.</td></tr><tr id="3c611121-6a91-8169-bd1c-e95d6ca95a90" dir="ltr"><td id="SNF;" class=""><strong>Religion</strong></td><td id="g@Tl" class="">16</td><td id=";BEA" class="">The knot inland isn’t a place where souls rest. It’s where they’re being <strong>kept</strong>.</td></tr><tr id="3c611121-6a91-8161-9632-d9434b15b711" dir="ltr"><td id="SNF;" class=""><strong>Investigation</strong></td><td id="g@Tl" class="">12</td><td id=";BEA" class="">The brass ring is seized solid with centuries of corrosion — but the wear where the sphere grinds against it is <strong>bright and fresh</strong>. Months old. This sat still for a very long time and started up again recently.</td></tr><tr id="3c611121-6a91-81c8-9462-ccc51d9f4a07" dir="ltr"><td id="SNF;" class=""><strong>Perception</strong></td><td id="g@Tl" class="">14</td><td id=";BEA" class="">Watch long enough to catch a light detach and travel. Without this, run it once on your own initiative anyway — this beat is too good to leave to a roll.</td></tr><tr id="3c611121-6a91-8133-89d7-c5f7e7f9189d" dir="ltr"><td id="SNF;" class=""><strong>Survival</strong> or <strong>navigator’s tools</strong></td><td id="g@Tl" class="">13</td><td id=";BEA" class="">Fix the knot’s position properly: a real bearing and a rough distance from where they’re standing.</td></tr><tr id="3c611121-6a91-8100-be23-eeab054a320b" dir="ltr"><td id="SNF;" class=""><strong>History</strong></td><td id="g@Tl" class="">15</td><td id=";BEA" class="">Nothing in elven history describes an instrument like this. Whatever it was built to watch, the elves didn’t invent it and didn’t name it.</td></tr></tbody></table><p id="3c611121-6a91-81f8-8022-e814c565084b" class="" dir="auto"><strong>Let one arrive while they watch.The Sphere cannot be destroyed.</strong> It is not an object with hit points. A weapon swung at it stops an inch short and the shock travels up the wielder’s arm; spells slide off. If Crescendo throws a character into it, <em>the character</em> takes the damage and the glass doesn’t so much as ring. Let them try once — a party that learns this thing outlived the building will treat it correctly.</p><p id="3c611121-6a91-8184-af19-f7d823d828e8" class="" dir="auto"><strong>Why they come back.</strong> The Sphere is a status readout on the death curse, permanently installed, and it is the only one they know about. Later in the campaign, when they want to know whether something they did worked — whether the curse is spreading, whether their friend is still lit, whether the knot inland has grown — this is where they come. The portal in the basement is what makes coming back cheap.</p><h3 id="3c611121-6a91-8104-be9e-cc5a9856a60f" class="" dir="auto">B. The Choirmaster — <em>the room, then the boss</em></h3><p id="3c611121-6a91-81df-be0b-e428063870b2" class="" dir="auto">This is not a fight that starts when they walk in. <strong>It starts as a conversation</strong>, turns into a room full of broken things attacking them, and only becomes a boss fight at the end.</p><blockquote id="3c611121-6a91-8100-8a6d-e6699b3d95cd" class="block-color-blue" data-notion-highlight="blue" dir="auto">At the far side of the chamber, a figure hangs a foot above the floor. It has the shape of an elf and it is made of gold — sleek, seamless, unhurried — and centuries of green corrosion have crept into every joint and seam. Underneath the green the metal is unscratched. It has not touched the ground in a very long time and does not appear to intend to.<br/>It is bent over something on the floor, doing something careful with both hands. When it registers you, it straightens and turns. There is no face to read.<br/>On the floor where it was working: a low mound of slime, pink-grey and wet, not the clear amber of the things below. There is structure still in it. Bone that hasn’t gone. Something that could be a face, most of the way dissolved. Beside it sits a shallow basin of clean spring water, and the floor around it has been swept.<br/>Slumped against the curved wall on either side stand two more of the singing statues from downstairs. One is missing an arm. Both are cracked open along the ribs and dark inside. Neither moves.</blockquote><p id="3c611121-6a91-818f-9ae3-c9020d77ff30" class="" dir="auto"><strong>What is actually happening here.</strong> The Choirmaster is a caretaker. When the tower fell it kept doing its job, and its job became one patient. It has been keeping that thing on the floor alive for centuries — water, cleaning, whatever it does with its hands — and it has never once considered stopping. That is the whole elven tragedy, delivered without a word of exposition. Let them look at it.</p><hr id="3c611121-6a91-81e6-925d-ca284a84de2d" dir="auto"/><h4 id="3c611121-6a91-811e-a326-e05e02070723" class="" dir="auto">Phase 1 — Questions (about one minute)</h4><p id="3c611121-6a91-8159-a440-e84230525812" class="" dir="auto"><strong>The Choirmaster will talk.</strong> It understands Elvish and Common and answers in a voice made of chimes, several tones at once. It is polite, patient, and completely unbothered by armed strangers. It has no concept that anything is wrong.</p><p id="3c611121-6a91-81bb-b72b-ff5db0dac336" class="" dir="auto"><strong>How to play it:</strong> it answers <em>facts</em> readily and has nothing at all to offer on <em>meaning</em>. It is a caretaker, not a scholar. Anything it doesn’t know, it says so, without curiosity.</p><table id="3c611121-6a91-8173-81f3-d9f2cf672da2" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-813a-b378-dfeb95fd4f93" dir="ltr"><th id="S&lt;}U" class="simple-table-header-color simple-table-header">If they ask</th><th id="xzEm" class="simple-table-header-color simple-table-header">It says</th></tr></thead><tbody><tr id="3c611121-6a91-8137-8136-f7675dcccaf2" dir="ltr"><td id="S&lt;}U" class="">What is this place?</td><td id="xzEm" class="">A station. It observes and it records.</td></tr><tr id="3c611121-6a91-815a-b351-cca49343b23d" dir="ltr"><td id="S&lt;}U" class="">Where is everyone?</td><td id="xzEm" class="">Below. It attends to the one that remains.</td></tr><tr id="3c611121-6a91-81b0-8df1-f0c4852a6f82" dir="ltr"><td id="S&lt;}U" class="">What is that on the floor?</td><td id="xzEm" class="">A patient. Stable. It has been stable a long time.</td></tr><tr id="3c611121-6a91-8177-b028-f637c2729693" dir="ltr"><td id="S&lt;}U" class="">Can it be healed?</td><td id="xzEm" class="">It does not know. It maintains. It does not cure.</td></tr><tr id="3c611121-6a91-812b-a01c-dd1c2c833435" dir="ltr"><td id="S&lt;}U" class="">What is the Sphere?</td><td id="xzEm" class="">An instrument. It reads. Reading is not its function to interpret.</td></tr><tr id="3c611121-6a91-8111-a58f-d437411e2fb7" dir="ltr"><td id="S&lt;}U" class="">What does it read?</td><td id="xzEm" class="">Arrivals.</td></tr><tr id="3c611121-6a91-81c1-b00b-f4f14e9ac847" dir="ltr"><td id="S&lt;}U" class="">Arrivals of <em>what</em>?</td><td id="xzEm" class="">It does not know. It was not told. It was not required to be told.</td></tr><tr id="3c611121-6a91-813f-a6c3-c55f750b1904" dir="ltr"><td id="S&lt;}U" class="">Why did it start again?</td><td id="xzEm" class="">It notes that it did. Roughly two hundred days ago, it began registering again. It has recorded this. No one has come to collect the record.</td></tr><tr id="3c611121-6a91-812d-a3ac-d553a2e4f6f3" dir="ltr"><td id="S&lt;}U" class="">What’s in the basement?</td><td id="xzEm" class="">A door. It is unlit. Doors require both ends.</td></tr><tr id="3c611121-6a91-8168-a47e-dee5aa4551e1" dir="ltr"><td id="S&lt;}U" class="">How do we light it?</td><td id="xzEm" class="">Three voices. It will describe the chimes plainly if asked. <strong>It is not hiding anything.</strong></td></tr><tr id="3c611121-6a91-81d6-b9d5-e3dee6889be2" dir="ltr"><td id="S&lt;}U" class="">Are you going to attack us?</td><td id="xzEm" class="">No.</td></tr></tbody></table><p id="3c611121-6a91-81c1-8699-f01502ed8667" class="" dir="auto"><strong>That last one is true when it says it.</strong></p><p id="3c611121-6a91-8165-97d8-ff4792807104" class="" dir="auto"><strong>Checks during the conversation:</strong></p><table id="3c611121-6a91-8197-af4e-c101d906e7eb" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-8156-81f0-e12ca51ae1cc" dir="ltr"><th id="K`uW" class="simple-table-header-color simple-table-header">Check</th><th id="JPqU" class="simple-table-header-color simple-table-header">DC</th><th id="d:sg" class="simple-table-header-color simple-table-header">Result</th></tr></thead><tbody><tr id="3c611121-6a91-8165-9544-c613ed5757ee" dir="ltr"><td id="K`uW" class=""><strong>Insight</strong></td><td id="JPqU" class="">12</td><td id="d:sg" class="">It isn’t lying and isn’t capable of it. It also isn’t <em>aware</em> — there’s no judgment behind the answers, just retrieval.</td></tr><tr id="3c611121-6a91-8156-9bf8-fa4159b74c50" dir="ltr"><td id="K`uW" class=""><strong>Medicine</strong> (the patient)</td><td id="JPqU" class="">13</td><td id="d:sg" class="">Alive. Barely, and for a very, very long time. Nothing they carry will help.</td></tr><tr id="3c611121-6a91-812a-aec5-ec1012c02712" dir="ltr"><td id="K`uW" class=""><strong>Medicine</strong></td><td id="JPqU" class="">17</td><td id="d:sg" class="">It should not be alive. Something is holding it here — the same <em>held</em> quality an Arcana 16 on the Sphere describes.</td></tr><tr id="3c611121-6a91-812a-9683-fca51697a847" dir="ltr"><td id="K`uW" class=""><strong>Arcana</strong></td><td id="JPqU" class="">13</td><td id="d:sg" class="">The Choirmaster is bound to a standing order it can no longer complete or abandon.</td></tr><tr id="3c611121-6a91-8111-b87b-dfa693f6b0b3" dir="ltr"><td id="K`uW" class=""><strong>Perception</strong></td><td id="JPqU" class="">12</td><td id="d:sg" class="">The two broken golems have fresh scoring on the floor beneath them. They have moved. Recently.</td></tr><tr id="3c611121-6a91-81f6-9f31-e0d02a3ad3a2" dir="ltr"><td id="K`uW" class=""><strong>History</strong> or <strong>Investigation</strong></td><td id="JPqU" class="">14</td><td id="d:sg" class="">The gold body has been repaired hundreds of times, always by itself, always the same way.</td></tr></tbody></table><p id="3c611121-6a91-8125-bf4f-cca96b9d6d8e" class="" dir="auto"><strong>Give them roughly a minute of real conversation</strong> — six to eight questions, or however long it stays interesting. Then:</p><hr id="3c611121-6a91-8149-845c-d6a3f71a7cd1" dir="auto"/><h4 id="3c611121-6a91-8138-a3c5-c066ccde055e" class="" dir="auto">Phase 2 — The room turns</h4><p id="3c611121-6a91-8169-8d1d-e56a70d817ee" class="" dir="auto">Without warning, and <strong>not because of anything the party did:</strong></p><blockquote id="3c611121-6a91-818e-944e-f6528c0e34bf" class="block-color-blue" data-notion-highlight="blue" dir="auto">The chimes in the gold figure’s chest change pitch — a note it did not choose, sliding upward. It stops mid-sentence and looks down at its own chest, and for the first time it seems to be paying attention to something other than you.<br/>Behind you, one of the broken statues grinds off the wall. Then the other. And the thing on the floor turns over and begins to come apart in your direction.</blockquote><p id="3c611121-6a91-8173-a51b-e68e1a525a52" class="" dir="auto"><strong>Roll initiative.</strong> The Choirmaster does <strong>not</strong> act in this phase. Read that clearly at the table — it drifts backward, away from the fight, and puts itself between the party and the patient. If asked, it says the tower is responding and it cannot countermand.</p><p id="3c611121-6a91-81e2-9d93-fdd5e074a062" class="" dir="auto"><strong>What attacks:</strong></p><ul id="3c611121-6a91-810a-b63d-d0f04c6f4aeb" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>2 singing golems</strong>, badly broken — <strong>half hit points (30 each)</strong>, and drop the second attack from their Multiattack. They are slow, loud, and falling apart as they swing.</li></ul><ul id="3c611121-6a91-8176-ade5-efe296b7b6c2" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>1 orange sludge</strong> — the patient. Use the standard orange sludge statblock (85 hp), and describe it as wetter, heavier, and more <em>awake</em> than the ones in the basement. It moves toward the party with intent.</li></ul><p id="3c611121-6a91-8181-af06-efbc32668fcd" class="" dir="auto"><strong>Don’t sweat the balance here.</strong> These are wounded, mismatched things, and the point of the phase is the horror of the caretaker’s patient getting up. If the party is struggling, the golems come apart on their own — a broken construct throwing itself into a fight is allowed to simply fail.</p><p id="3c611121-6a91-810e-b995-f2980cb578d5" class="" dir="auto"><strong>Checks during Phase 2:</strong></p><table id="3c611121-6a91-81c8-8737-e134cc3cf9d3" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-8112-a54e-de22d05e6351" dir="ltr"><th id="NlAU" class="simple-table-header-color simple-table-header">Check</th><th id="t:DE" class="simple-table-header-color simple-table-header">DC</th><th id="&lt;BP=" class="simple-table-header-color simple-table-header">Result</th></tr></thead><tbody><tr id="3c611121-6a91-812f-ad53-d7f902aa045f" dir="ltr"><td id="NlAU" class=""><strong>Arcana</strong></td><td id="t:DE" class="">14</td><td id="&lt;BP=" class="">The order driving the golems isn’t coming from the Choirmaster. It’s coming from the tower — a defence routine, waking up the way the Sphere woke up.</td></tr><tr id="3c611121-6a91-81f3-9f45-ff699a3f7259" dir="ltr"><td id="NlAU" class=""><strong>Insight</strong></td><td id="t:DE" class="">13</td><td id="&lt;BP=" class="">The gold figure is <em>distressed</em>. It is watching the patient attack them and it is not intervening because it cannot.</td></tr><tr id="3c611121-6a91-81c0-8f42-fc97d8177f81" dir="ltr"><td id="NlAU" class=""><strong>Perception</strong></td><td id="t:DE" class="">13</td><td id="&lt;BP=" class="">It keeps repositioning to stay between the party and where the patient was lying. It is still guarding an empty patch of floor.</td></tr></tbody></table><hr id="3c611121-6a91-8114-85b7-daaa424db05e" dir="auto"/><h4 id="3c611121-6a91-81e1-ba6d-f74ecb50f64f" class="" dir="auto">Phase 3 — The boss</h4><p id="3c611121-6a91-8154-b39c-df00feffd5f8" class="" dir="auto"><strong>The Choirmaster fights when, and only when, one of these happens:</strong></p><ul id="3c611121-6a91-816e-a49f-c185cb5e0a40" class="bulleted-list" dir="auto"><li style="list-style-type:disc">The party attacks it.</li></ul><ul id="3c611121-6a91-818f-b5c7-f5c9a7a88214" class="bulleted-list" dir="auto"><li style="list-style-type:disc">The patient sludge is destroyed.</li></ul><ul id="3c611121-6a91-81fe-a5d3-dc0926e3cf92" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Someone touches the Sphere, the chart racks, or reaches into its open chest cabinet.</li></ul><p id="3c611121-6a91-81eb-bad0-f33591467c4d" class="" dir="auto">If the party clears the room without touching it or the patient, <strong>it does not fight at all</strong> — it drifts back to the swept patch of floor and waits for a patient that isn’t coming. That’s a legitimate ending, and a bleaker one than killing it. Let them take it.</p><p id="3c611121-6a91-8119-b5f4-eccecb8049fa" class="" dir="auto">When it does turn:</p><blockquote id="3c611121-6a91-81bd-8c9a-e8a29e749c97" class="block-color-blue" data-notion-highlight="blue" dir="auto">The gold figure looks at what is left on the floor. Then at you. Both hands come up, and this time they are not careful.</blockquote><p id="3c611121-6a91-8153-81aa-c258da0aea65" class="" dir="auto">Full statblock below. Now the room matters.</p><p id="3c611121-6a91-81af-86e5-df9d383de0ff" class="" dir="auto"><strong>The room is the fight.</strong> Eighty feet across means <strong>Conductor’s Song (30 ft) does not cover the room</strong>. Ranged characters and casters standing near the outer wall are outside it entirely; melee characters are inside it constantly. The Choirmaster moves 30 feet a turn and will go for whoever destroyed the patient first. Play that honestly and the fight becomes a positioning problem instead of a slugfest — which is what an open arena is for.</p><p id="3c611121-6a91-81f4-b2eb-ef700b048b30" class="" dir="auto"><strong>Call the Choir</strong> is worth almost nothing now — the golems in this room are already up and probably dead. If the custodians downstairs are still active, they answer. If the party stood them down, nothing comes.</p><hr id="3c611121-6a91-8169-9297-f2c9e5d48b88" dir="auto"/><h4 id="3c611121-6a91-8155-9fbf-e2ffd0b2eb83" class="" dir="auto">The Choirmaster</h4><p id="3c611121-6a91-81b5-bc82-c7a8114436dd" class="" dir="auto"><em>Large construct, unaligned</em></p><p id="3c611121-6a91-8191-a5c7-eadcad23af79" class="" dir="auto"><strong>Armor Class</strong> 16 (natural armor) <strong>Hit Points</strong> 105 (14d10 + 28) <strong>Speed</strong> 0 ft., fly 30 ft. (hover)</p><table id="3c611121-6a91-81d5-9505-cb582cc33ee1" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-81a8-8168-e07570d96e2a" dir="ltr"><th id="}pIn" class="simple-table-header-color simple-table-header">STR</th><th id="MRZx" class="simple-table-header-color simple-table-header">DEX</th><th id="teLw" class="simple-table-header-color simple-table-header">CON</th><th id="TJjC" class="simple-table-header-color simple-table-header">INT</th><th id="ZEoB" class="simple-table-header-color simple-table-header">WIS</th><th id="?^CO" class="simple-table-header-color simple-table-header">CHA</th></tr></thead><tbody><tr id="3c611121-6a91-811e-8cb8-fe905d7e9c4e" dir="ltr"><td id="}pIn" class="">18 (+4)</td><td id="MRZx" class="">12 (+1)</td><td id="teLw" class="">15 (+2)</td><td id="TJjC" class="">10 (+0)</td><td id="ZEoB" class="">14 (+2)</td><td id="?^CO" class="">18 (+4)</td></tr></tbody></table><p id="3c611121-6a91-81c5-862e-d54f656722ae" class="" dir="auto"><strong>Saving Throws</strong> Con +5, Wis +5 <strong>Damage Resistances</strong> bludgeoning, piercing, and slashing from nonmagical attacks <strong>Damage Immunities</strong> poison, psychic <strong>Condition Immunities</strong> charmed, exhaustion, frightened, paralyzed, petrified, poisoned <strong>Senses</strong> darkvision 60 ft., passive Perception 12 <strong>Languages</strong> understands Elvish; speaks only in tones <strong>Challenge</strong> 6 (2,300 XP)</p><p id="3c611121-6a91-81fe-afce-d18cfc909ae5" class="" dir="auto"><strong>Immutable Form.</strong> Immune to any spell or effect that would alter its form.</p><p id="3c611121-6a91-81e5-ba02-dc4929006e1d" class="" dir="auto"><strong>Hover.</strong> It does not touch the ground and never has. Difficult terrain, caltrops, <em>grease</em> and similar floor effects do nothing to it. It cannot be knocked prone.</p><p id="3c611121-6a91-8121-afc5-cf64ceaf9946" class="" dir="auto"><strong>Magic Resistance.</strong> Advantage on saves against spells and other magical effects.</p><p id="3c611121-6a91-8141-9ccc-c5ddfc7925e2" class="" dir="auto"><strong>Conductor’s Song.</strong> At the start of each creature’s turn within 30 feet that can hear it, that creature makes a <strong>DC 13 Wisdom save</strong> or is charmed until the start of its next turn (no reactions, speed halved).</p><p id="3c611121-6a91-81ab-96c4-c1e1c0858200" class="" dir="auto"><strong>Open Cabinet.</strong> The chimes in its chest are exposed. A creature can use an action to make a <strong>DC 13 Dexterity check</strong> using thieves’ tools, or an attack roll against AC 13, to strike the hanging chimes. On a success, the Choirmaster is <strong>stunned until the end of its next turn</strong> and its Conductor’s Song doesn’t function during that time. <em>This is the fight’s intended lever — telegraph the open chest hard.</em></p><h4 id="3c611121-6a91-81ea-a604-f79e025cc689" class="" dir="auto">Actions</h4><p id="3c611121-6a91-81df-9001-ecdf53dab098" class="" dir="auto"><strong>Multiattack.</strong> Two slams, or one slam and one Discordant Note.</p><p id="3c611121-6a91-81fd-a90f-da5a72d087d2" class="" dir="auto"><strong>Slam.</strong> <em>Melee Weapon Attack:</em> +7 to hit, reach 10 ft., one target. <em>Hit:</em> 11 (2d6 + 4) bludgeoning plus 4 (1d8) thunder.</p><p id="3c611121-6a91-8115-a4d6-fd74714198b1" class="" dir="auto"><strong>Discordant Note.</strong> <em>Ranged Spell Attack:</em> +7 to hit, range 60 ft., one target. <em>Hit:</em> 13 (3d8) thunder damage, and the target must succeed on a DC 13 Constitution save or be deafened for 1 minute. <em>A deafened creature automatically succeeds on saves against Conductor’s Song.</em> Players who work this out have earned it.</p><p id="3c611121-6a91-81a0-8573-e5cf96b1d5d5" class="" dir="auto"><strong>Crescendo (Recharge 5–6).</strong> Every creature within 20 feet makes a <strong>DC 13 Constitution save</strong>, taking 18 (4d8) thunder damage and being pushed 15 feet and knocked prone on a failure, or half damage on a success.</p><h4 id="3c611121-6a91-812b-8b21-fff31e4cc490" class="" dir="auto">Reactions</h4><p id="3c611121-6a91-8190-b449-f8fda3cf6591" class="" dir="auto"><strong>Call the Choir (1/Day).</strong> When first reduced below half hit points, the Choirmaster sounds a summoning tone. Any singing golems still active in the hall below march up the stair and arrive at the start of the second round after. <em>If the party stood the custodians down or destroyed them, nothing comes — reward them for that.</em></p><hr id="3c611121-6a91-8106-b18f-ca52642be930" dir="auto"/><p id="3c611121-6a91-81fc-9fda-d392a7649623" class="" dir="auto"><strong>Treasure.</strong> Hanging in the chest cabinet, among forty ordinary chimes, is a <strong>white bronze chime</strong> — cracked across the lip but still sounding true. It is a spare.</p><p id="3c611121-6a91-8109-90ae-d6703668153c" class="" dir="auto"><em>If the party talked the Choirmaster through Phase 1 and never fought it, it will simply hand the chime over when asked. It was never guarding it.</em></p><h3 id="3c611121-6a91-81df-bebe-e4718a3b82b8" class="" dir="auto">C. The Chart Racks</h3><p id="3c611121-6a91-8100-aca9-cdefba741aec" class="" dir="auto">Standing around the curved wall — sky maps on vellum, stone, and hammered tin, layered by generations. They provide <strong>half cover</strong> and burn readily.</p><p id="3c611121-6a91-81e3-93bd-ee6610360a71" class="" dir="auto"><strong>DC 12 Investigation</strong> turns up the useful ones: centuries of night sky, carefully drawn, in several different hands. The elves watched the sky from this room for a very long time and wrote all of it down. Nothing in the charts explains the Sphere, and nobody here ever wrote down what it was for.</p><p id="3c611121-6a91-813e-bf2a-c09bab0b2231" class="" dir="auto"><strong>Treasure.</strong> Rolled in a tin chart-tube: the <strong>mithral chime</strong>, cool to the touch, etched inside the bell with a single Elvish numeral.</p><p id="3c611121-6a91-81a3-bb2a-c7765f743a22" class="" dir="auto">Also in the racks: an <strong>elven star chart on hammered tin</strong>, intact and portable. No magic. It functions as navigator’s tools, and grants <strong>advantage on Survival checks to navigate at night</strong> anywhere on the island. With the balcony below, this tower is the party’s mapping breakthrough.</p><h3 id="3c611121-6a91-8135-af68-fee4c637cef5" class="" dir="auto">D. The Drains</h3><p id="3c611121-6a91-816b-8ea5-f010e6855d87" class="" dir="auto">Slots two inches wide radiate from the centre of the floor outward beneath the aperture — drainage, cut by the builders for the weather that comes through the open roof. They are dry more often than not. They are a nuisance, not a hazard: any small dropped object — a chime, a ring, a potion vial — has a <strong>50% chance</strong> of going down a slot on a failed grab, ending up in the water channel in the basement. It is not lost. It is just somewhere very inconvenient.</p><p id="3c611121-6a91-81c6-b573-e326c09bc04e" class="" dir="auto">Worth knowing before the fight, and worth <em>not</em> telling the players before the fight.</p><h3 id="3c611121-6a91-81bc-b0e8-fc9b790e241c" class="" dir="auto">E. The Balcony</h3><p id="3c611121-6a91-81c0-8f4a-ca415ba37742" class="" dir="auto">A stone shelf projecting from the southeastern arc of the wall, through a low door. <strong>This is the party’s real reward.</strong></p><p id="3c611121-6a91-81aa-80b2-dad7a585a058" class="" dir="auto">From here, in clear weather, a character can fix the positions of landmarks across a wide sweep of the island — smoking peaks, plateaus, river courses, the coastline.</p><p id="3c611121-6a91-8192-b3a7-db558946f74c" class="" dir="auto"><strong>Reveal six hexes</strong> of the players’ map, their choice, within eight hexes of the Blind Eye. An hour and a <strong>DC 13 Survival</strong> reveals three more. In a campaign with no maps for sale and no guides for hire, say out loud that this is worth more than the gold.</p><p id="3c611121-6a91-815e-8265-dda50bd1fbb3" class="" dir="auto">Looking inland — toward the part of the island where the knot of lights sits in the Sphere — shows nothing useful. There’s a haze over that quarter that the weather doesn’t explain.</p><p id="3c611121-6a91-81a0-8738-f0f23a3441f3" class="" dir="auto"><strong>A rest point.</strong> This is the only genuinely safe ground in the tower once the Choirmaster is down. Nothing comes up here.</p><h1 id="3c611121-6a91-81bf-871e-c78af5154799" class="" dir="auto">Basement — The Portal</h1><p id="3c611121-6a91-81be-8a92-c20b922dc9ad" class="" dir="auto"><strong>Three spaces and that’s all.</strong> Down the stair, a hall, a right turn, and one big room. Everything happens in the big room.</p><pre id="3c611121-6a91-81ac-9be5-f1eb4d890aad" class="code code-wrap"><code style="white-space:pre-wrap;word-break:break-all">        [ stair down from room 4 ]
+                    |
+                    |  B1. hall, 40 ft
+                    |
+                    +--------------------+
+                                         |  right turn
+      +----------------------------------+---+
+      |                                      |
+      |          B2. THE AMBER HALL           |
+      |               60 x 60                 |
+      |                                      |
+      |               (o) portal ring        |
+      |                                      |
+      +--------------------------------------+</code></pre><p id="3c611121-6a91-8158-a08b-d280176e0eb7" class="" dir="auto"><strong>Getting down.</strong> The stairs down open off room <strong>4</strong>, the spinner roost, in the southeast corner of the ground floor. Astral spinner webbing runs about twenty feet down the stairwell and then stops abruptly.</p><p id="3c611121-6a91-81eb-a374-e022f2a99c49" class="" dir="auto"><strong>The service hatch.</strong> Set into the floor of room <strong>2</strong>, under the mat of witchweave, is a fitted stone disc (<strong>DC 13 Perception</strong> once the growth is cleared). It is the elves’ freight hatch down into the portal room — forty feet above that floor, and it opens only from below. It is not a way in. Once the party releases it from the basement side, it becomes a fast route between the ground floor and the portal.</p><h3 id="3c611121-6a91-8186-8905-cb0a4a994454" class="" dir="auto">B1. The Stair and Hall</h3><blockquote id="3c611121-6a91-81f7-a550-da3677824284" class="block-color-blue" data-notion-highlight="blue" dir="auto">The stair ends in a straight hall of white stone, forty feet long and wide enough for two of you abreast. The walls are carved with the same clean geometry as the rooms above — interlocking hexagons, nested squares — but the work stops halfway along, mid-pattern, as though the carvers put down their tools one day and never came back. At the end, the hall turns right.</blockquote><p id="3c611121-6a91-81d1-a704-d43691cf6c70" class="" dir="auto">Nothing lives here and nothing is hidden here. It’s a corridor, and its one job is to make the party turn a corner before they see the room.</p><p id="3c611121-6a91-8198-a16f-e5836f511e71" class="" dir="auto"><strong>The chokepoint.</strong> Ten feet wide. If the fight in B2 goes badly, this hall is where a party with a shield, a doorway, or <em>grease</em> turns it around — the sludges can’t squeeze past each other in here. Worth remembering when you run the encounter.</p><h3 id="3c611121-6a91-8199-841f-d0cc6205ec9d" class="" dir="auto">B2. The Amber Hall — 60 ft × 60 ft</h3><blockquote id="3c611121-6a91-811c-80bd-d09a8b38bf0d" class="block-color-blue" data-notion-highlight="blue" dir="auto">The hall opens into a chamber far larger than anything above — sixty feet on a side, the ceiling lost in the dark above your light. The floor is a sheet of orange crystal six inches deep, and there are things suspended in it: a silver circlet, a hand mirror, rings, a comb, a stone cup. All of it laid out in neat rows, the way you would empty your pockets before going in to do something.<br/>In the centre of the room, standing on end in the middle of the amber, is a ring of white stone twelve feet across, its inner edge smooth as glass. Three shallow bowl-shaped depressions are cut into the floor around its base. A channel of steaming spring water crosses beneath it and runs away into the dark.<br/>Two low mounds of translucent orange slime sit motionless among the belongings, smelling faintly of grapefruit.</blockquote><p id="3c611121-6a91-811e-8537-e596b69581e3" class="" dir="auto"><strong>Encounter: 2 orange sludges</strong> (CR 4 each, <strong>2,200 XP</strong>), <strong>85 hit points each</strong> rather than 115 — at AC 7 they’re easy to hit, and the full statblock turns this into an eight-round grind. They wake when a light source comes within 20 feet.</p><p id="3c611121-6a91-810a-9a72-c8783367ae58" class="" dir="auto"><strong>The amber floor is difficult terrain.</strong> Uneven, ridged, tacky underfoot. This is what makes the fight work: the sludges move 15 feet, and a party halved by the terrain moves 15 feet too. Nobody outruns anything in here. Characters who climb onto the raised amber ridges along the walls (<strong>DC 10 Acrobatics</strong>) move at full speed but fight from unstable footing — disadvantage on melee attacks.</p><p id="3c611121-6a91-8145-8e9b-f0e0183d9a99" class="" dir="auto"><strong>The reveal.</strong> Orange sludges form parts of themselves into humanoid shapes, and these do it constantly — elven proportions, long fingers, the set of the skull. When a sludge is destroyed it leaves a residue of orange crystal with a <strong>skeleton set inside it</strong>, curled, unmistakably elven.</p><p id="3c611121-6a91-8175-b382-c48d257a9796" class="" dir="auto">These are the elves who built the tower. <strong>That is the entire story and it needs no more than that.</strong> Whatever they were doing down here went wrong, and this is what’s left. Don’t explain it, don’t have anyone explain it, and don’t answer it later.</p><p id="3c611121-6a91-8175-bd80-d5571180b88e" class="" dir="auto"><strong>Note on gear.</strong> Corrode Metal permanently degrades weapons and armour, and in a campaign with no shops that can cripple a level-4 party. Two mitigations, both in the source material:</p><ul id="3c611121-6a91-8181-aa07-d913040d5055" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Telegraph it.</strong> Corroded blades and fittings lie all through the amber, left by people who came before. Describe them before initiative.</li></ul><ul id="3c611121-6a91-81f5-9c43-c59d4aa2b6b3" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>The alcohol rule.</strong> The Field Guide says high-proof spirits clean the slime. Let a character who scrubs a corroded weapon or armour piece within <strong>1 hour</strong>, using a flask of strong drink, remove <strong>1 point</strong> of accumulated penalty. Tej won’t do it — it needs the strong stuff, which makes a skin of rum an item worth carrying.</li></ul><p id="3c611121-6a91-81ef-abab-d16c5591b0d7" class="" dir="auto">A party that fights barehanded, with wooden hafts, or with spells takes no corrosion at all. Reward the ones who notice.</p><hr id="3c611121-6a91-8165-b7d6-d5178d33bd41" dir="auto"/><h4 id="3c611121-6a91-812c-86f4-e97d6a49d624" class="" dir="auto">The Portal</h4><p id="3c611121-6a91-81cc-8f79-e003c139efc6" class="" dir="auto"><strong>This is the reason to come down here.</strong> The elves called it a fountain. It’s a door, it has been shut a very long time, and switching it on is permanent.</p><p id="3c611121-6a91-815e-9256-c15f61119588" class="" dir="auto"><strong>Activation.</strong> Place a chime in each of the three depressions and strike all three so the tones sound together and hold:</p><ul id="3c611121-6a91-812b-9aa3-e3f900e1fe77" class="bulleted-list" dir="auto"><li style="list-style-type:disc">the <strong>copper chime</strong> (room 5, the custodian’s throat)</li></ul><ul id="3c611121-6a91-81cf-849e-fc491468aa88" class="bulleted-list" dir="auto"><li style="list-style-type:disc">the <strong>mithral chime</strong> (upper floor C, the chart tube)</li></ul><ul id="3c611121-6a91-81af-b190-fd97b1a06a99" class="bulleted-list" dir="auto"><li style="list-style-type:disc">the <strong>white bronze chime</strong> (upper floor B, the Choirmaster’s cabinet)</li></ul><ul id="3c611121-6a91-810f-a292-c1f42559393f" class="bulleted-list" dir="auto"><li style="list-style-type:disc">the <strong>fourth chime</strong> (in the amber here, B2) — the spare</li></ul><p id="3c611121-6a91-81fc-95f7-ec44cc286f9b" class="" dir="auto"><strong>Any three of the four work.</strong> The chord needs three voices, not three specific ones.</p><blockquote id="3c611121-6a91-81c3-904e-ed4f6282a4da" class="block-color-blue" data-notion-highlight="blue" dir="auto">The tones meet and refuse to fade. The water in the channel goes still. Then the ring fills — not with light, but with <strong>dark</strong>. A flat, depthless dark that is not the wall behind it, and not the room you are standing in. Cold air comes off it, dry and still, and it smells of cold stone. Somewhere on the other side of it there is a room, and there is nothing lit in that room.</blockquote><p id="3c611121-6a91-81df-be99-eb2f35e302d9" class="" dir="auto"><strong>It is on, and it is waiting.</strong> A torch thrown through vanishes and shows nothing. A hand pushed through feels cold air and open space. Anyone who steps through arrives somewhere pitch dark and can step straight back — <strong>the way home stays open</strong>, because this end is lit. There is nothing to find over there yet.</p><p id="3c611121-6a91-8117-909a-ea9be1a21536" class="" dir="auto"><strong>Why: the far end isn’t switched on.</strong> A portal takes two lit ends. The party has lit one. Say this plainly through whatever means you like — a line scratched on the ring’s base, or simply let a character with Arcana work it out on a <strong>DC 12</strong> check. This is not a mystery. It’s an errand.</p><p id="3c611121-6a91-8101-9b9d-f9438b30cf8a" class="" dir="auto"><strong>The fourth chime is the compass.</strong> Once the ring is lit, whichever chime the party kept as a spare begins to <strong>ring on its own</strong> — faintly, unprompted, once in a while, from inside a pack. It does it more often the closer they get to the tower’s twin, somewhere else on the island. Run it as simply as that: when they’re getting warm, the chime sounds.</p><p id="3c611121-6a91-816f-9620-f40045022759" class="" dir="auto"><strong>Once both ends are lit, they have fast travel</strong> between the two for the rest of the campaign — and a cheap way back to the Sphere whenever they want to check on it.</p><p id="3c611121-6a91-815c-a9ff-e84c8aaef4fe" class="" dir="auto"><strong>The freight hatch.</strong> Forty feet up in the ceiling, directly above the ring, is the underside of the hatch in room 2’s floor. Getting up there needs flight, a spider climb, or forty feet of rope and a good throw. Released from below, it becomes a fast route between the ground floor and the portal.</p><hr id="3c611121-6a91-815b-a84e-f69e74fe2083" dir="auto"/><h4 id="3c611121-6a91-812b-834c-d390962d2943" class="" dir="auto">Treasure</h4><p id="3c611121-6a91-81b5-b8d6-eef75aaeaf42" class="" dir="auto">Everything valuable in the basement is in the amber floor. An hour to chip out with tools, or ten minutes once the sludges are dead and the party can work unhurried:</p><ul id="3c611121-6a91-81db-92bb-d7d9d7818fe5" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>250 gp</strong> in elven jewellery — circlet, chains, rings, all of it good work.</li></ul><ul id="3c611121-6a91-8132-b0b6-db77bce7fb23" class="bulleted-list" dir="auto"><li style="list-style-type:disc">Among the rings, a <strong>ring of fire resistance</strong>. Nothing marks it out; it’s a plain band of white metal in a line of prettier things, and they’ll find out what it is when somebody puts it on or casts <em>identify</em>. <em>Do not draw attention to it. It matters later.</em></li></ul><ul id="3c611121-6a91-813e-a327-ff48bc6b4e91" class="bulleted-list" dir="auto"><li style="list-style-type:disc">The <strong>fourth chime</strong>, mithral, suspended in the crystal still gripped in a hand that isn’t attached to anything.</li></ul><ul id="3c611121-6a91-8189-8760-ce9457ad6c8c" class="bulleted-list" dir="auto"><li style="list-style-type:disc">A <em>hand mirror of silver</em> (no magic), <strong>40 gp</strong>.</li></ul><ul id="3c611121-6a91-814c-9beb-f00b1f2fc088" class="bulleted-list" dir="auto"><li style="list-style-type:disc">2 flasks of <strong>antitoxin</strong>, still sealed.</li></ul><ul id="3c611121-6a91-816f-a662-e2685c8903a8" class="bulleted-list" dir="auto"><li style="list-style-type:disc">2 <em>potions of healing</em>, stoppered in white stone.</li></ul><ul id="3c611121-6a91-81e6-ad9a-fe85d18630bc" class="bulleted-list" dir="auto"><li style="list-style-type:disc">An <strong>ember coral rod</strong> — permanent light equal to a candle, unbreakable, needs no fuel. In a campaign with no shops this is a genuine prize.</li></ul><ul id="3c611121-6a91-81cb-8f09-db6d93b94e3d" class="bulleted-list" dir="auto"><li style="list-style-type:disc">A stoppered vial of <strong>shadow lily pollen</strong> — one dose, darkvision for 24–48 hours.</li></ul><ul id="3c611121-6a91-814c-be98-c0bbeb90ac2b" class="bulleted-list" dir="auto"><li style="list-style-type:disc">A <strong>staff of the adder</strong>, its head carved as a coiled serpent in the elven style. <em>Bonus action to animate: the head becomes a living snake, 1d6 piercing plus DC 15 Con save or 3d6 poison, reach 5 ft. AC 15, 20 hp, and it heals fully every time it reverts — but if the snake is dropped to 0 the staff is destroyed for good.</em></li></ul><p id="3c611121-6a91-8119-aad9-fa81ddb7bb1b" class="" dir="auto"><strong>One tablet</strong>, propped against the ring’s base in a cramped late hand, is the only writing in the basement. It reads:</p><blockquote id="3c611121-6a91-81a3-8d1c-c755ac793210" class="block-color-blue" data-notion-highlight="blue" dir="auto"><em>It has begun again. It is counting.</em></blockquote><hr id="3c611121-6a91-81aa-9960-e72711c6efc9" dir="auto"/><h2 id="3c611121-6a91-8187-bd6c-ea30375eead5" class="" dir="auto">What They Can Actually Learn</h2><p id="3c611121-6a91-81ae-9d15-d99f197c303f" class="" dir="auto">None of this is said aloud anywhere in the tower. <strong>Only the first three matter.</strong></p><table id="3c611121-6a91-814a-bf24-cf6f78e24e4a" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-816c-b4c2-eab87e653534" dir="ltr"><th id="SwWq" class="simple-table-header-color simple-table-header">Detail</th><th id="ws:q" class="simple-table-header-color simple-table-header">What it tells them</th></tr></thead><tbody><tr id="3c611121-6a91-81e0-9267-fd529fc44fa7" dir="ltr"><td id="SwWq" class="">The Sphere is a map of Chult with lights on it</td><td id="ws:q" class="">Something is tracking specific people on this island.</td></tr><tr id="3c611121-6a91-8136-a4f9-c31e2de53af8" dir="ltr"><td id="SwWq" class="">A light sitting on their camp, and lights on themselves</td><td id="ws:q" class="">It has their friend. It has <em>them</em>.</td></tr><tr id="3c611121-6a91-81c1-9f0e-e6b4bfa89484" dir="ltr"><td id="SwWq" class="">A light going grey and sliding inland to the knot</td><td id="ws:q" class="">When one of these people dies, whatever this is collects them — and it all goes to one place.</td></tr><tr id="3c611121-6a91-8128-94ed-e7604d37d231" dir="ltr"><td id="SwWq" class="">The elven skeletons inside the sludges</td><td id="ws:q" class="">The builders are still here, and it went badly for them.</td></tr><tr id="3c611121-6a91-81c6-b1db-c58a2278a145" dir="ltr"><td id="SwWq" class="">A gold machine tending a dying elf for centuries</td><td id="ws:q" class="">Whatever happened here, it happened to <em>people</em>, and one of them never finished.</td></tr><tr id="3c611121-6a91-8151-8d67-fe5c52c55390" dir="ltr"><td id="SwWq" class="">A lit portal opening onto dark</td><td id="ws:q" class="">There’s another one of these somewhere, and it isn’t on.</td></tr></tbody></table><p id="3c611121-6a91-81c7-a252-e1991309b590" class="" dir="auto">If they leave with rows one through three, the dungeon worked. Rows four and five are gravy.</p><hr id="3c611121-6a91-816f-9881-e3f8e2d4bf83" dir="auto"/><h2 id="3c611121-6a91-8111-bd77-c6aa3c0bfb47" class="" dir="auto">Encounter Budget — Four Characters, Level 4</h2><p id="3c611121-6a91-81f0-8720-e2250851b3c8" class="" dir="auto">Your thresholds: <strong>1,500</strong> low / <strong>2,000</strong> moderate / <strong>4,400</strong> high.</p><table id="3c611121-6a91-8124-81e9-edec90b1e9d8" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-8126-9f28-c92ffe7a0a17" dir="ltr"><th id="\eu;" class="simple-table-header-color simple-table-header">Encounter</th><th id="=kFJ" class="simple-table-header-color simple-table-header">XP</th><th id="uy@Z" class="simple-table-header-color simple-table-header">Difficulty</th></tr></thead><tbody><tr id="3c611121-6a91-8108-a035-ff015f2bdf28" dir="ltr"><td id="\eu;" class="">1 giant centipede (room 3)</td><td id="=kFJ" class="">450</td><td id="uy@Z" class="">Easy — the first teeth</td></tr><tr id="3c611121-6a91-81ee-9b8e-c916b3abb55a" dir="ltr"><td id="\eu;" class="">1 shambling mound (room 2)</td><td id="=kFJ" class="">1,800</td><td id="uy@Z" class="">Moderate — one engulf away from a crisis</td></tr><tr id="3c611121-6a91-8196-8b4f-cdbb314bfd1a" dir="ltr"><td id="\eu;" class="">3 astral spinners (room 4)</td><td id="=kFJ" class="">600</td><td id="uy@Z" class="">Easy — the warm-up</td></tr><tr id="3c611121-6a91-81d7-925a-d444225682d9" dir="ltr"><td id="\eu;" class="">2 singing golems (room 5)</td><td id="=kFJ" class="">3,600</td><td id="uy@Z" class="">High — and avoidable entirely</td></tr><tr id="3c611121-6a91-81ed-9967-d7e734e0b866" dir="ltr"><td id="\eu;" class="">Upper floor, Phase 2 — 2 broken golems + the patient sludge</td><td id="=kFJ" class="">~1,100</td><td id="uy@Z" class="">The room turning on them mid-conversation</td></tr><tr id="3c611121-6a91-8107-b5fa-cf611dfccf6f" dir="ltr"><td id="\eu;" class="">The Choirmaster (upper floor, Phase 3)</td><td id="=kFJ" class="">2,300</td><td id="uy@Z" class="">High for a solo; the stun lever is the counterweight. <strong>Skippable if they never provoke it.</strong></td></tr><tr id="3c611121-6a91-81be-bf4f-d832ce802098" dir="ltr"><td id="\eu;" class="">2 orange sludges (basement)</td><td id="=kFJ" class="">2,200</td><td id="uy@Z" class="">Moderate-plus, grindy rather than lethal</td></tr></tbody></table><p id="3c611121-6a91-8177-aa88-e8478f3ec0d2" class="" dir="auto"><strong>Run order matters.</strong> The golems and the Choirmaster back to back with no rest will drop somebody. Build in a rest point — the balcony (E) is the natural one, and the only genuinely safe ground in the tower.</p><p id="3c611121-6a91-81fa-8e54-d23b923a44c5" class="" dir="auto"><strong>Total if they clear everything:</strong> roughly 12,000 XP, about 2,738 each. A level-4 character sits at 2,700 and needs 6,500 for level 5, so this dungeon carries them most of the way there — and clears it comfortably if they also stand down the golems rather than skipping them. If you’re running milestone, level them at the portal.</p><h2 id="3c611121-6a91-81a9-89d9-cf67b067e33c" class="" dir="auto">Treasure Summary</h2><p id="3c611121-6a91-818f-8d5f-d2e5901781b2" class="" dir="auto"><strong>Four permanent items, one per player, spread front to back so they’re never two rooms from a payoff:</strong></p><table id="3c611121-6a91-815f-ac43-f4c712fc1e16" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-81d8-a04a-c5a6e4fb7a82" dir="ltr"><th id="pCiU" class="simple-table-header-color simple-table-header">Item</th><th id="Uo=H" class="simple-table-header-color simple-table-header">Where</th></tr></thead><tbody><tr id="3c611121-6a91-81d9-b02c-df6947759aed" dir="ltr"><td id="pCiU" class=""><em>+1 light crossbow</em></td><td id="Uo=H" class="">Room 1 — the very first room</td></tr><tr id="3c611121-6a91-8112-b224-d0179e064692" dir="ltr"><td id="pCiU" class=""><em>+1 dagger</em></td><td id="Uo=H" class="">Room 4 — the spinner cocoons</td></tr><tr id="3c611121-6a91-812a-8374-c89e500d32e9" dir="ltr"><td id="pCiU" class=""><em>Ring of fire resistance</em></td><td id="Uo=H" class="">Basement — unmarked, among the amber jewellery</td></tr><tr id="3c611121-6a91-81f5-8fe4-cb31f639b4d5" dir="ltr"><td id="pCiU" class=""><em>Staff of the adder</em></td><td id="Uo=H" class="">Basement — in the amber</td></tr></tbody></table><p id="3c611121-6a91-8147-88e1-ea8a5941d377" class="" dir="auto">Plus the <strong>ember coral rod</strong> (permanent light, no fuel) and the <strong>elven star chart</strong>, which are tools rather than personal gear.</p><p id="3c611121-6a91-8145-87a4-c57da409633c" class="" dir="auto"><strong>Coin and art:</strong> roughly <strong>640 gp</strong> — room 1 tiles (30), room 2 serving set (25), room 3 tool case (120), room 4 coin (60), room 5 salvaged copper (40), room 6 lenses (75), basement jewellery (250), silver mirror (40).</p><p id="3c611121-6a91-811c-8196-c04c5e18103c" class="" dir="auto"><strong>Trade goods:</strong> twelve jars of <em>reywish</em> dye — worth what the Night Axe or the lizardfolk say it’s worth — <strong>and the recipe</strong>, which is the better prize. From here on the party can make the stuff themselves and sell it. That’s a small ongoing income in a campaign with no shops, and it’s all reywish ever needs to be.</p><p id="3c611121-6a91-816c-9d67-e85234d5c3fc" class="" dir="auto"><strong>Consumables:</strong> 3 <em>potions of healing</em>, 1 <em>potion of greater healing</em>, 3 doses of witchweave salve, 2 antitoxins, <em>spell scroll of comprehend languages</em>, shadow lily pollen.</p><p id="3c611121-6a91-81a8-b9e1-d3c4d7950a53" class="" dir="auto"><strong>And two things that aren’t loot:</strong> the balcony’s six-hex reveal, and a portal that will halve their travel time for the rest of the campaign once they find its twin.</p><p id="3c611121-6a91-8135-9eb2-f5f35165fffc" class="" dir="auto"><strong>Two watch-outs at this tier:</strong></p><ul id="3c611121-6a91-8123-9677-f8dfb7a745c0" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>Magic weapons.</strong> The resistance change makes the golems and the Choirmaster beatable by everyone, and the crossbow in room 1 plus the dagger in room 4 mean the party is armed <em>before</em> the hard fights rather than after. That was the point of putting them where they are.</li></ul><ul id="3c611121-6a91-8178-8c5b-d6472ba1b327" class="bulleted-list" dir="auto"><li style="list-style-type:disc"><strong>The solo boss problem.</strong> One creature against four PCs eats stun, restrain, and prone. The Choirmaster has no legendary resistance on purpose, so a lucky <em>hold person</em> effectively ends it. If your party leans control-heavy, give it <strong>Legendary Resistance (1/Day)</strong> and nothing more.</li></ul><h2 id="3c611121-6a91-81b4-b679-f128805d4b0e" class="" dir="auto">Scaling Up</h2><p id="3c611121-6a91-81fd-9c6c-c4bbf723324e" class="" dir="auto"><strong>Level 5–6:</strong> Restore three custodians at 75 hp each (fill a third niche). Choirmaster back to 136 hp, DC 15 saves, 2d8+4 slams, 6d8 Crescendo, and immunity instead of resistance. Third sludge.</p><p id="3c611121-6a91-816c-9826-d988cc94ba6b" class="" dir="auto"><strong>Level 7+:</strong> All custodians answer Call the Choir. Choirmaster gains a second Crescendo and Legendary Resistance (2/day). Add two obsidian shard minions in the amber, still executing a guard order. The sludges grow ambermoss — their pseudopods carry the poison.</p><p id="3c611121-6a91-8105-ad32-ff5ec886aad7" class="" dir="auto"><strong>Pacing:</strong> one long session, or two comfortable ones. The basement should be quiet after the boss — nothing wanders below the stair except what’s in the amber.</p><hr id="3c611121-6a91-8138-b73d-da19a1b69a5e" dir="auto"/><h2 id="3c611121-6a91-811d-8d80-d6237feaf52e" class="" dir="auto">Quick Reference — Creatures</h2><table id="3c611121-6a91-81e4-9199-c849311ae519" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-815e-b31d-fb6f32d04d41" dir="ltr"><th id="fHV[" class="simple-table-header-color simple-table-header">Room</th><th id="XJJ~" class="simple-table-header-color simple-table-header">Creature</th><th id="`=ws" class="simple-table-header-color simple-table-header">Count</th><th id="T|D&lt;" class="simple-table-header-color simple-table-header">XP</th><th id="crwf" class="simple-table-header-color simple-table-header">Notes</th></tr></thead><tbody><tr id="3c611121-6a91-8178-9cde-d6fa7758b2d9" dir="ltr"><td id="fHV[" class=""><strong>Terrace Doors</strong></td><td id="XJJ~" class=""><em>ambermoss</em> (hazard)</td><td id="`=ws" class="">—</td><td id="T|D&lt;" class="">—</td><td id="crwf" class="">DC 13 Dex or poisoned. Same effect on the same character forever.</td></tr><tr id="3c611121-6a91-8158-b485-f1481536e44b" dir="ltr"><td id="fHV[" class=""><strong>1. Entry Hall</strong></td><td id="XJJ~" class="">—</td><td id="`=ws" class="">—</td><td id="T|D&lt;" class="">—</td><td id="crwf" class="">Empty.</td></tr><tr id="3c611121-6a91-818c-b8d4-cffda9bd1e61" dir="ltr"><td id="fHV[" class=""><strong>2. Refectory</strong></td><td id="XJJ~" class="">Shambling mound (90 hp)</td><td id="`=ws" class="">1</td><td id="T|D&lt;" class="">1,800</td><td id="crwf" class="">Is the floor mat. Engulf is the danger; benches are bolted, 2 ft, get out of reach.</td></tr><tr id="3c611121-6a91-81a8-a37f-c2e077289c8c" dir="ltr"><td id="fHV[" class=""><strong>3. Dye Works</strong></td><td id="XJJ~" class="">Giant centipede, red (CR 2)</td><td id="`=ws" class="">1</td><td id="T|D&lt;" class="">450</td><td id="crwf" class="">Dens in the steaming third basin. 3d6 fire + poisoned. Blindsight 30 ft.</td></tr><tr id="3c611121-6a91-8128-9db5-fbcb28e27b02" dir="ltr"><td id="fHV[" class=""><strong>4. Roost</strong></td><td id="XJJ~" class="">Astral spinners</td><td id="`=ws" class="">3</td><td id="T|D&lt;" class="">600</td><td id="crwf" class="">Collecting, not defending. Stairs down are in this room.</td></tr><tr id="3c611121-6a91-8197-aed1-e1474cdd98d6" dir="ltr"><td id="fHV[" class=""><strong>5. Hall of Custodians</strong></td><td id="XJJ~" class="">Singing golems (60 hp, <strong>resistance</strong> not immunity)</td><td id="`=ws" class="">2</td><td id="T|D&lt;" class="">3,600</td><td id="crwf" class=""><strong>Skippable.</strong> Only attack creatures moving toward the exit. Chime, instrument, or 3× DC 15 Performance stands them down permanently.</td></tr><tr id="3c611121-6a91-8178-adb6-dd4e956e5645" dir="ltr"><td id="fHV[" class=""><strong>6. The Stores</strong></td><td id="XJJ~" class="">—</td><td id="`=ws" class="">—</td><td id="T|D&lt;" class="">—</td><td id="crwf" class="">Empty.</td></tr><tr id="3c611121-6a91-817a-b0bf-caa71915c123" dir="ltr"><td id="fHV[" class=""><strong>7. Stair Drum</strong></td><td id="XJJ~" class="">—</td><td id="`=ws" class="">—</td><td id="T|D&lt;" class="">—</td><td id="crwf" class="">Empty, and there’s no dust.</td></tr><tr id="3c611121-6a91-812c-b97b-f0e90ccaf8fb" dir="ltr"><td id="fHV[" class=""><strong>Upper Floor</strong></td><td id="XJJ~" class="">2 broken singing golems (<strong>30 hp</strong>, one attack only)</td><td id="`=ws" class="">2</td><td id="T|D&lt;" class="">—</td><td id="crwf" class="">Phase 2. Grind off the wall a minute into the conversation.</td></tr><tr id="3c611121-6a91-8139-826f-d47726124411" dir="ltr"><td id="fHV[" class=""><strong>Upper Floor</strong></td><td id="XJJ~" class="">Orange sludge — <em>the patient</em></td><td id="`=ws" class="">1</td><td id="T|D&lt;" class="">1,100</td><td id="crwf" class="">Phase 2. Standard statblock, 85 hp. Wetter, fleshier, bone still in it.</td></tr><tr id="3c611121-6a91-8100-8a91-f886aa131702" dir="ltr"><td id="fHV[" class=""><strong>Upper Floor</strong></td><td id="XJJ~" class=""><strong>The Choirmaster</strong> (105 hp, CR 6, hovers)</td><td id="`=ws" class="">1</td><td id="T|D&lt;" class="">2,300</td><td id="crwf" class="">Phase 3 only. Fights if attacked, if the patient dies, or if they touch the Sphere/charts/cabinet. Open Cabinet = stun lever, DC 13.</td></tr><tr id="3c611121-6a91-8159-9ff8-e0d88678db70" dir="ltr"><td id="fHV[" class=""><strong>B1. Stair and Hall</strong></td><td id="XJJ~" class="">—</td><td id="`=ws" class="">—</td><td id="T|D&lt;" class="">—</td><td id="crwf" class="">Empty. Chokepoint: 10 ft wide.</td></tr><tr id="3c611121-6a91-815a-8955-fe4aa0d00de1" dir="ltr"><td id="fHV[" class=""><strong>B2. Amber Hall</strong></td><td id="XJJ~" class="">Orange sludges (85 hp)</td><td id="`=ws" class="">2</td><td id="T|D&lt;" class="">2,200</td><td id="crwf" class="">Wake to light. Amber floor is difficult terrain. Corrode Metal — telegraph it. Portal is in this room.</td></tr></tbody></table><p id="3c611121-6a91-81a1-8620-fad4193bf456" class="" dir="auto"><strong>Totals.</strong> Everything cleared: <strong>10,950 XP</strong> (~2,738 each). Golems skipped: ~5,100. Thresholds for four L4 characters — 1,500 low / 2,000 moderate / 4,400 high.</p><hr id="3c611121-6a91-81e3-a516-eb0bb63e9325" dir="auto"/><h2 id="3c611121-6a91-811f-80b0-cc4148e5990f" class="" dir="auto">Quick Reference — Chimes, Items, and What Matters</h2><p id="3c611121-6a91-812c-a4a2-e437bd185ba9" class="" dir="auto"><strong>Three chimes light the portal. There are four. Any three work.</strong></p><table id="3c611121-6a91-81f7-9796-e206065a6e20" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-818b-95f8-e2e70ebd1f70" dir="ltr"><th id="wdMs" class="simple-table-header-color simple-table-header">Chime</th><th id=":HeI" class="simple-table-header-color simple-table-header">Where</th><th id="l]eJ" class="simple-table-header-color simple-table-header">Getting it</th></tr></thead><tbody><tr id="3c611121-6a91-814e-9515-e8d2c6778404" dir="ltr"><td id="wdMs" class=""><strong>Copper</strong> (<em>IX</em>)</td><td id=":HeI" class="">Room 5 — near golem’s throat</td><td id="l]eJ" class="">Behind the golems, or stand them down</td></tr><tr id="3c611121-6a91-8175-b581-c6ef9bb12e26" dir="ltr"><td id="wdMs" class=""><strong>Mithral</strong></td><td id=":HeI" class="">Upper floor — chart racks</td><td id="l]eJ" class="">Behind the Choirmaster</td></tr><tr id="3c611121-6a91-815f-8284-df7f951c8fa3" dir="ltr"><td id="wdMs" class=""><strong>White bronze</strong> (cracked spare)</td><td id=":HeI" class="">Upper floor — Choirmaster’s chest cabinet</td><td id="l]eJ" class="">Behind the Choirmaster</td></tr><tr id="3c611121-6a91-81b6-982e-c42f812f1953" dir="ltr"><td id="wdMs" class=""><strong>Fourth chime</strong></td><td id=":HeI" class="">Basement — in the amber</td><td id="l]eJ" class="">Behind the sludges</td></tr></tbody></table><p id="3c611121-6a91-8175-b9ee-f36ae3428ad9" class="" dir="auto"><em>Three of four are above the basement, so a party that goes down first can’t light the ring and has to climb back up. The one they keep as a spare becomes the compass — it rings on its own as they near the tower’s twin.</em></p><table id="3c611121-6a91-817e-8fff-c6c40c4ae8c9" class="simple-table" dir="ltr"><thead class="simple-table-header"><tr id="3c611121-6a91-8155-95d3-f0d08377ae32" dir="ltr"><th id="]dQN" class="simple-table-header-color simple-table-header">Room</th><th id="P=bc" class="simple-table-header-color simple-table-header">The thing that matters</th></tr></thead><tbody><tr id="3c611121-6a91-81b6-9cd3-fc37a0e1c25a" dir="ltr"><td id="]dQN" class=""><strong>1. Entry Hall</strong></td><td id="P=bc" class=""><strong>+1 light crossbow</strong> in the crushed guard rack. 30 gp tiles, silver stylus.</td></tr><tr id="3c611121-6a91-8180-ba12-f02dac51887f" dir="ltr"><td id="]dQN" class=""><strong>2. Refectory</strong></td><td id="P=bc" class=""><strong>Freight hatch</strong> to the portal room under the growth (DC 13 Perception) — opens only from below. Silver set 25 gp, <em>potion of greater healing</em>, witchweave salve ×3 (DC 15 Nature).</td></tr><tr id="3c611121-6a91-8105-abf3-f48405fce2e2" dir="ltr"><td id="]dQN" class=""><strong>3. Dye Works</strong></td><td id="P=bc" class="">Where the reywish was made. Elven tool case, <strong>120 gp</strong>, in the centipede’s basin. Sipopa and snapping grass.</td></tr><tr id="3c611121-6a91-8155-90b0-e91048a3895d" dir="ltr"><td id="]dQN" class=""><strong>4. Roost</strong></td><td id="P=bc" class=""><strong>Stairs down.</strong> <strong>+1 dagger</strong>, 60 gp, <em>potion of healing</em>, broken spyglass — 15 ft up in the cocoons.</td></tr><tr id="3c611121-6a91-8184-956d-e7343858ed98" dir="ltr"><td id="]dQN" class=""><strong>5. Hall of Custodians</strong></td><td id="P=bc" class=""><strong>Copper chime.</strong> The artery — every route passes through here. Four niches of rubble, 40 gp copper.</td></tr><tr id="3c611121-6a91-8193-a579-d32e2d2d71c1" dir="ltr"><td id="]dQN" class=""><strong>6. The Stores</strong></td><td id="P=bc" class="">Twelve jars of <strong>reywish</strong> and <strong>the recipe</strong> — they can make and sell it from now on. 3 glass lenses (25 gp ea), <em>scroll of comprehend languages</em>.</td></tr><tr id="3c611121-6a91-81b7-a182-e16b9aa4b72d" dir="ltr"><td id="]dQN" class=""><strong>7. Stair Drum</strong></td><td id="P=bc" class=""><strong>Stairs up.</strong> Nothing else.</td></tr><tr id="3c611121-6a91-81eb-96b9-c53e8b87d1e1" dir="ltr"><td id="]dQN" class=""><strong>Upper — Choirmaster</strong></td><td id="P=bc" class=""><strong>Talks first.</strong> Gold, hovering, mossy, tending a dying elf. One minute of questions, then the room attacks (2 broken golems + the patient sludge). It only fights in phase 3. <strong>White bronze chime</strong> in its chest — it hands it over if they never fight it.</td></tr><tr id="3c611121-6a91-8187-a2b1-ddc31243cc90" dir="ltr"><td id="]dQN" class=""><strong>Upper — THE SPHERE</strong></td><td id="P=bc" class=""><strong>The point of the dungeon.</strong> A map of Chult. ~3 dozen lights = people the curse has hold of. Bright = early, dim = nearly gone. <strong>A light on their camp. Lights on any raised or oddly-healed PC, right where they stand.</strong> A knot of lights inland. Indestructible.</td></tr><tr id="3c611121-6a91-81a2-86ff-e09ef3070f08" dir="ltr"><td id="]dQN" class=""><strong>Upper — Charts</strong></td><td id="P=bc" class=""><strong>Mithral chime.</strong> <strong>Elven star chart</strong> — navigator’s tools, advantage on night navigation island-wide.</td></tr><tr id="3c611121-6a91-8194-bf67-c9fb01cf75e4" dir="ltr"><td id="]dQN" class=""><strong>Upper — Balcony</strong></td><td id="P=bc" class=""><strong>Reveals 6 hexes</strong> of their choice within 8. +3 more for an hour and DC 13 Survival. Safe rest point.</td></tr><tr id="3c611121-6a91-8173-b709-ddf3f50e729c" dir="ltr"><td id="]dQN" class=""><strong>Upper — Drains</strong></td><td id="P=bc" class="">Dropped small items: 50% they end up in the basement water channel.</td></tr><tr id="3c611121-6a91-81a4-9a24-d8b979ce1e62" dir="ltr"><td id="]dQN" class=""><strong>B1. Stair and Hall</strong></td><td id="P=bc" class="">Corridor. Carving stops mid-pattern. Chokepoint if the sludges pursue.</td></tr><tr id="3c611121-6a91-81e5-8960-e042fa3901bb" dir="ltr"><td id="]dQN" class=""><strong>B2. Amber Hall</strong></td><td id="P=bc" class=""><strong>THE PORTAL</strong> — three chimes light it permanently; it opens onto <strong>dark</strong> because the far end isn’t on yet. Elven skeletons inside the sludges. <strong>Ring of fire resistance</strong> (unmarked), <strong>staff of the adder</strong>, ember coral rod, 250 gp jewellery, fourth chime, shadow lily pollen, 2 <em>potions of healing</em>, 2 antitoxins, silver mirror 40 gp.</td></tr></tbody></table></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
